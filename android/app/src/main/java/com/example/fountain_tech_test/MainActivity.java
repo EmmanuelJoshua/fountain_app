@@ -18,7 +18,7 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {
 
-  private String sharedText;
+  private String sharedURI;
   private static final String CHANNEL = "app.channel.shared.data";
 
   @Override
@@ -29,8 +29,8 @@ public class MainActivity extends FlutterActivity {
     String type = intent.getType();
 
     if (Intent.ACTION_SEND.equals(action) && type != null) {
-      if ("*/*".equals(type)) {
-        handleSendText(intent); // Handle text being sent
+      if ("*/*".equals(type) || "text/xml".equals(type)) {
+        handleSendURI(intent); // Handle text being sent
       }
     }
   }
@@ -42,22 +42,19 @@ public class MainActivity extends FlutterActivity {
       new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
               .setMethodCallHandler(
                       (call, result) -> {
-                          if (call.method.contentEquals("getSharedText")) {
-                                // System.out.println("Enter intent send " + sharedText);
-                              result.success(sharedText);
-                              sharedText = null;
+                          if (call.method.contentEquals("getSharedURI")) {
+                              result.success(sharedURI);
+                              sharedURI = null;
                           }
                       }
               );
   }
 
-  void handleSendText(Intent intent) {
+  void handleSendURI(Intent intent) {
 
         Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
 
-         sharedText = uri.toString();
+         sharedURI = uri.toString();
 
-          System.out.println("Enter intent send " + sharedText);
-        
   }
 }
