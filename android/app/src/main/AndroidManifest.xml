@@ -22,6 +22,21 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <intent-filter>
+              <action android:name="android.intent.action.SEND" />
+              <category android:name="android.intent.category.BROWSABLE" />
+              <category android:name="android.intent.category.DEFAULT" />
+              <data android:pathPattern=".*\\.opml" />
+              <data android:pathPattern=".*\\..*\\.opml" />
+              <data android:pathPattern=".*\\..*\\..*\\.opml" />
+              <data android:pathPattern=".*\\..*\\..*\\..*\\.opml" />
+              <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.opml" />
+              <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.opml" />
+              <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.opml" />
+              <data android:host="*" />
+              <!-- <data android:mimeType="text/x-opml" /> -->
+               <data android:mimeType="text/xml" />
+            </intent-filter> 
         </activity>
         <meta-data
             android:name="flutterEmbedding"
